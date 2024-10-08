@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言:学习X86指令体系中的逻辑运算指令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="X86指令体系中的逻辑运算指令">
+<meta property="og:url" content="http://example.com/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言:学习X86指令体系中的逻辑运算指令">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-21T07:37:55.000Z">
+<meta property="article:modified_time" content="2024-04-21T08:25:50.832Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="汇编语言">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>X86指令体系中的逻辑运算指令 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          X86指令体系中的逻辑运算指令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-04-21 15:37:55 / Modified: 16:25:50" itemprop="dateCreated datePublished" datetime="2024-04-21T15:37:55+08:00">2024-04-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">汇编语言</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>前言:学习X86指令体系中的逻辑运算指令</p>
+<span id="more"></span>
+
+<p>逻辑运算指令分为单操作数指令，也有双操作数指令。操作数可为8位或16位二进制数。双操作数指令不允许两个操作数都是存储器操作数，目的操作数不能是立即数。<strong>两个操作数的位数要一样</strong></p>
+<h4 id="逻辑与运算指令AND"><a href="#逻辑与运算指令AND" class="headerlink" title="逻辑与运算指令AND"></a>逻辑与运算指令AND</h4><p>指令格式:AND OPD,OPS</p>
+<p>指令功能:对两个操作数执行 逻辑与运算，结果送到目的操作数，即OPD&amp;&amp;OPS  ➡  OPD</p>
+<p>对标志位的影响:设置CF &#x3D; OF &#x3D; 0，根据结果确定SF、ZF和PF状态，而对AF未定义</p>
+<h3 id="逻辑或运算OR"><a href="#逻辑或运算OR" class="headerlink" title="逻辑或运算OR"></a>逻辑或运算OR</h3><p>指令格式:OR OPD，OPS</p>
+<p>指令功能:对两个操作数进行逻辑或运算，结果送到目的操作数，即OPD || OPS  ➡  OPD</p>
+<p>对标志位的影响同AND</p>
+<h3 id="逻辑非指令NOT"><a href="#逻辑非指令NOT" class="headerlink" title="逻辑非指令NOT"></a>逻辑非指令NOT</h3><p>指令格式:NOT OPD</p>
+<p>指令功能:对一个操作数执行逻辑非运算。不影响标志位</p>
+<h3 id="逻辑异或运算XOR"><a href="#逻辑异或运算XOR" class="headerlink" title="逻辑异或运算XOR"></a>逻辑异或运算XOR</h3><p>指令格式:XOR OPD,OPS</p>
+<p>指令功能:对两个操作数执行逻辑异或运算，结果送到目的操作数。对标志位的影响同AND指令</p>
+<h3 id="测试指令TEST"><a href="#测试指令TEST" class="headerlink" title="测试指令TEST"></a>测试指令TEST</h3><p>指令格式:TEST  OPD，OPS</p>
+<p>指令功能:对两个操作数执行逻辑与运算，结果不回送到目的操作数。OPD&amp;&amp;OPS，结果不回送OPD，仅建立结果状态标志</p>
+<p>TEST指令可用于检测一些条件是否满足，但又不会改变原操作数的内容</p>
+<h3 id="逻辑运算指令的应用"><a href="#逻辑运算指令的应用" class="headerlink" title="逻辑运算指令的应用"></a>逻辑运算指令的应用</h3><h4 id="AND指令可用于屏蔽某些位"><a href="#AND指令可用于屏蔽某些位" class="headerlink" title="AND指令可用于屏蔽某些位"></a>AND指令可用于屏蔽某些位</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AND BL,11110110B  ;将BL中的D0和D3位清零，其他位不变</span><br><span class="line">AND AL,0FH        ;屏蔽AL高四位，保留低四位(常用)</span><br></pre></td></tr></table></figure>
+
+<h4 id="OR指令可用于置某些位为1"><a href="#OR指令可用于置某些位为1" class="headerlink" title="OR指令可用于置某些位为1"></a>OR指令可用于置某些位为1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">or BL,00001001B   ;将BL中的D3和D0位置1</span><br><span class="line">or AX,AX          ;置标志位，这一条指令没有改变AX的值，但是改变了标志</span><br><span class="line">                  ;寄存器的值，可以反应出AX的标志状态，在程序中经常使用</span><br></pre></td></tr></table></figure>
+
+<h4 id="TEST测试某位是否为0"><a href="#TEST测试某位是否为0" class="headerlink" title="TEST测试某位是否为0"></a>TEST测试某位是否为0</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov AL,0EFH</span><br><span class="line">TEST AL,40H</span><br></pre></td></tr></table></figure>
+
+<p>测试AL寄存器中的D<del>6</del>位是否为0。40H的D<del>6</del>位为1，其余各位为0。指令TEST做相与运算，如果AL的D<del>6</del>位为0，结果一定为0</p>
+<p>指令TEST执行后可根据状态位ZF的状态来判断AL寄存器的D<del>6</del>位是否为0，但没有改变AL寄存器的内容</p>
+<h4 id="对指定位求反"><a href="#对指定位求反" class="headerlink" title="对指定位求反"></a>对指定位求反</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XOR BL,0FH  ;BL高四位不变，低四位求反</span><br><span class="line">XOR AL,55H  ;AL偶数位不变，奇数位求反</span><br></pre></td></tr></table></figure>
+
+<h4 id="清除寄存器及CF-常用指令"><a href="#清除寄存器及CF-常用指令" class="headerlink" title="清除寄存器及CF(常用指令)"></a>清除寄存器及CF(常用指令)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XOR AX，AX  ;AX = 0,CF = 0</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"># 汇编语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/19/%E6%95%B0%E7%BB%84-%E7%9F%A9%E9%98%B5/" rel="prev" title="数组/矩阵">
+      <i class="fa fa-chevron-left"></i> 数组/矩阵
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4/" rel="next" title="X86指令体系下的移位指令">
+      X86指令体系下的移位指令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E4%B8%8E%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4AND"><span class="nav-number">1.</span> <span class="nav-text">逻辑与运算指令AND</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E6%88%96%E8%BF%90%E7%AE%97OR"><span class="nav-number"></span> <span class="nav-text">逻辑或运算OR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E9%9D%9E%E6%8C%87%E4%BB%A4NOT"><span class="nav-number"></span> <span class="nav-text">逻辑非指令NOT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97XOR"><span class="nav-number"></span> <span class="nav-text">逻辑异或运算XOR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%8C%87%E4%BB%A4TEST"><span class="nav-number"></span> <span class="nav-text">测试指令TEST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number"></span> <span class="nav-text">逻辑运算指令的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AND%E6%8C%87%E4%BB%A4%E5%8F%AF%E7%94%A8%E4%BA%8E%E5%B1%8F%E8%94%BD%E6%9F%90%E4%BA%9B%E4%BD%8D"><span class="nav-number">1.</span> <span class="nav-text">AND指令可用于屏蔽某些位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OR%E6%8C%87%E4%BB%A4%E5%8F%AF%E7%94%A8%E4%BA%8E%E7%BD%AE%E6%9F%90%E4%BA%9B%E4%BD%8D%E4%B8%BA1"><span class="nav-number">2.</span> <span class="nav-text">OR指令可用于置某些位为1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TEST%E6%B5%8B%E8%AF%95%E6%9F%90%E4%BD%8D%E6%98%AF%E5%90%A6%E4%B8%BA0"><span class="nav-number">3.</span> <span class="nav-text">TEST测试某位是否为0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%8C%87%E5%AE%9A%E4%BD%8D%E6%B1%82%E5%8F%8D"><span class="nav-number">4.</span> <span class="nav-text">对指定位求反</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E5%AF%84%E5%AD%98%E5%99%A8%E5%8F%8ACF-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">清除寄存器及CF(常用指令)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

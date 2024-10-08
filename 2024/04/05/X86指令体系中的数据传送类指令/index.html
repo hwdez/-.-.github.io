@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言：学习8086指令体系中的数据传送类指令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="X86指令体系中的数据传送类指令">
+<meta property="og:url" content="http://example.com/2024/04/05/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E7%B1%BB%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言：学习8086指令体系中的数据传送类指令">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-05T15:56:53.000Z">
+<meta property="article:modified_time" content="2024-04-17T01:35:25.018Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="汇编语言">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/04/05/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E7%B1%BB%E6%8C%87%E4%BB%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>X86指令体系中的数据传送类指令 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/05/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E7%B1%BB%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          X86指令体系中的数据传送类指令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-04-05 23:56:53" itemprop="dateCreated datePublished" datetime="2024-04-05T23:56:53+08:00">2024-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-04-17 09:35:25" itemprop="dateModified" datetime="2024-04-17T09:35:25+08:00">2024-04-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">汇编语言</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>前言：学习8086指令体系中的数据传送类指令</p>
+<span id="more"></span>
+
+<h3 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h3><p>MOV指令将源操作数复制到目的的操作数。格式如下：</p>
+<p><code>mov OPD,OPS</code></p>
+<p>其中，目的操作数的内容会发生改变，而源操作数不会改变。这种数据从右到左的移动与C++或Java中的赋值语句相似。</p>
+<p>在几乎所有的汇编语言指令中，左边的操作数是<strong>目标操作数</strong>，而右边的操作数是<strong>源操作数</strong>。只要按照如下原则，MOV指令使用操作数是非常灵活的。        </p>
+<p><code>mov reg/mem,imm</code></p>
+<p><code>mov seg/reg/mem,reg</code></p>
+<p><code>mov seg/reg,mem</code></p>
+<p><code>mov reg/mem,seg</code></p>
+<p><u>(reg表示的是通用寄存器；mem表示内存单元；imm是立即数；seg表示的是段寄存器)</u></p>
+<p><strong>内存到内存</strong>  单条MOV指令不能直接将数据从一个内存位置传送到另一个内存位置。相反，在将操作数的值赋值给内存操作数之前，必须先将该数值传从给另一个寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov reg,mem</span><br><span class="line">mov mem,reg</span><br></pre></td></tr></table></figure>
+
+<p><strong>MOV指令小结</strong></p>
+<ol>
+<li><strong>两个存储单元之间</strong>不可以直接传送数据。<strong>两个内存单元</strong>之间不能进行操作，<strong>适用于所有操作</strong>。</li>
+<li>目的操作数<strong>不能是CS及立即数</strong>，CS寄存器的内容是由操作系统给出；同样的<strong>IP也不能作为OPD</strong>。</li>
+<li>OPD、OPS的<strong>位数必须保持一致</strong>，同样适用于所有指令。</li>
+<li>计算机根据寄存器<strong>默认其省略的段寄存器</strong>，所以指令只要<strong>给出偏移地址</strong>。</li>
+<li>在内存和寄存器之间传送字类型数据是<strong>高地址和高8位寄存器对应</strong>，<strong>低地址和低8位寄存器</strong>对应。</li>
+</ol>
+<h3 id="查表指令XLAT"><a href="#查表指令XLAT" class="headerlink" title="查表指令XLAT"></a>查表指令XLAT</h3><p><strong>指令格式</strong>:  </p>
+<p>XLAT  TABLE   或  XLAT</p>
+<p>指令功能:把待查表格的一个字节内容送到AL累加器中。待查表格存于内存单元，TABLE为待查表格的首地址</p>
+<p>执行前，应将待查表格的首地址TABLE先送到BX寄存器中，然后将待查字节与其距表首地址的位移量送给AL</p>
+<p>执行后，将有效地址为(BX) + (AL) 的内容单元的内容传送给(AL)。即(AL) &lt;—— ((BX) + (AL))</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设待查表的首地址为1000H，待查字节与表首地址的偏移量为6，则执行前要将首地址送到BX寄存器，位移量送AL寄存器，执行后AL = 88H。</span><br></pre></td></tr></table></figure>
+
+<p>**指令中没有出现AL和BX寄存器，在指令中没有出现的寄存器称为隐含寄存器。 **</p>
+<h3 id="堆栈指令PUSH和POP"><a href="#堆栈指令PUSH和POP" class="headerlink" title="堆栈指令PUSH和POP"></a>堆栈指令PUSH和POP</h3><p>数据进入堆栈的操作称为进栈(PUSH)，数据退出堆栈的操作称为出栈(POP)</p>
+<p>SP指向栈顶，当数据进栈时，SP做减量调整，即栈顶向低地址调整；数据出栈时，SP做增量调整，即栈顶向高地址调整</p>
+<p>在8086中，堆栈的进栈和出栈都是以字为单位，即每次进栈和出栈都是两个字节</p>
+<p><strong>指令格式</strong>:</p>
+<p>PUSH     OPD</p>
+<p>POP       OPD</p>
+<p>指令功能:PUSH指令将OPD压入栈，栈顶指针SP自动减2；POP指令将栈顶的一个字数据送到OPD，栈顶指针SP自动加2<br><strong>OPD必须是16位寄存器，16位内存单元</strong></p>
+<p>堆栈操作指令不改变标志位寄存器。堆栈指令多用于保存中间结果，也用于保存子程序或中断现场</p>
+<p>例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push ax</span><br><span class="line">push bx</span><br><span class="line">pop ax</span><br><span class="line">pop bx</span><br></pre></td></tr></table></figure>
+
+<p>假设执行前ax &#x3D; 4444H，bx &#x3D; 5555H；则执行完ax &#x3D; 5555H， bx &#x3D; 4444H</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pop [BX]  ;  将栈顶的数据传送给BX寄存器指向两个连续的内存单元</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="标志传送寄存器"><a href="#标志传送寄存器" class="headerlink" title="标志传送寄存器"></a>标志传送寄存器</h3><h4 id="标志位送AH指令LAHF"><a href="#标志位送AH指令LAHF" class="headerlink" title="标志位送AH指令LAHF"></a>标志位送AH指令LAHF</h4><p>指令格式:LAHF</p>
+<p>指令功能:取标志寄存器的<strong>低8位传送给AH</strong>。该指令<strong>不会影响标志寄存器</strong>的内容。</p>
+<h4 id="AH送标志寄存器指令SAHF"><a href="#AH送标志寄存器指令SAHF" class="headerlink" title="AH送标志寄存器指令SAHF"></a>AH送标志寄存器指令SAHF</h4><p>指令格式:SAHF</p>
+<p>指令功能:将AH寄存器的内容传送给<strong>PSW的低8位</strong>。该指令<strong>影响</strong>PSW中是<strong>SF、ZF、AF、PF、CF</strong>标志</p>
+<h4 id="标志进栈指令PUSHF"><a href="#标志进栈指令PUSHF" class="headerlink" title="标志进栈指令PUSHF"></a>标志进栈指令PUSHF</h4><p>指令格式:PUSHF</p>
+<p>指令功能:标志寄存器<strong>入栈</strong>，<u>(SP)  &lt;—— (SP) - 2</u>。该指令<strong>不会影响标志寄存器</strong>的内容</p>
+<h4 id="标志出栈指令POPF"><a href="#标志出栈指令POPF" class="headerlink" title="标志出栈指令POPF"></a>标志出栈指令POPF</h4><p>指令格式:POPF</p>
+<p>指令功能:与PUSHF指令的功能<strong>相反</strong>，将栈顶的内容送标志寄存器，(<u>SP) &lt; ——(SP) + 2</u>。该指令<strong>会影响标志寄存器的内容</strong></p>
+<ul>
+<li>PUSHF和POPF主要用于<u>子程序</u>和<u>中断过程中对PSW内容的保护和恢复</u></li>
+</ul>
+<hr>
+<h3 id="地址传送指令"><a href="#地址传送指令" class="headerlink" title="地址传送指令"></a>地址传送指令</h3><h4 id="有效地址指令LEA"><a href="#有效地址指令LEA" class="headerlink" title="有效地址指令LEA"></a>有效地址指令LEA</h4><p>指令格式: </p>
+<p>LEA OPD,OPS</p>
+<p>OPD可为一个16位的通用寄存器，通常为BX，BP，DI，SI。OPD可为变量名、标号或者地址表达式</p>
+<p>指令功能:将源操作数的有效地址送给目的寄存器中。该指令不影响标志位</p>
+<h4 id="取地址指令LDS及LES"><a href="#取地址指令LDS及LES" class="headerlink" title="取地址指令LDS及LES"></a>取地址指令LDS及LES</h4><p>指令格式:</p>
+<p>LDS OPD,OPS</p>
+<p>LES OPD,OPS</p>
+<p>其中OPD是任意的一个16位的寄存器，OPS是存储器地址</p>
+<p>指令功能:是将OPS所指向的存储单元的的连续4个字节(32位)的内容分别传送到OPD和DS寄存器或ES寄存器中</p>
+<p>LES指令的功能与LDS的指令功能相似，不同的是传送到DS寄存器的地址换到ES寄存器</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"># 汇编语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84/" rel="prev" title="x86指令体系中的寄存器组">
+      <i class="fa fa-chevron-left"></i> x86指令体系中的寄存器组
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/06/IDA%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="next" title="IDA的基本使用">
+      IDA的基本使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MOV%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">MOV指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%A1%A8%E6%8C%87%E4%BB%A4XLAT"><span class="nav-number">2.</span> <span class="nav-text">查表指令XLAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%A0%88%E6%8C%87%E4%BB%A4PUSH%E5%92%8CPOP"><span class="nav-number">3.</span> <span class="nav-text">堆栈指令PUSH和POP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E4%BC%A0%E9%80%81%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">标志传送寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E4%BD%8D%E9%80%81AH%E6%8C%87%E4%BB%A4LAHF"><span class="nav-number">4.1.</span> <span class="nav-text">标志位送AH指令LAHF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AH%E9%80%81%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E6%8C%87%E4%BB%A4SAHF"><span class="nav-number">4.2.</span> <span class="nav-text">AH送标志寄存器指令SAHF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E8%BF%9B%E6%A0%88%E6%8C%87%E4%BB%A4PUSHF"><span class="nav-number">4.3.</span> <span class="nav-text">标志进栈指令PUSHF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E5%87%BA%E6%A0%88%E6%8C%87%E4%BB%A4POPF"><span class="nav-number">4.4.</span> <span class="nav-text">标志出栈指令POPF</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">地址传送指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E5%9C%B0%E5%9D%80%E6%8C%87%E4%BB%A4LEA"><span class="nav-number">5.1.</span> <span class="nav-text">有效地址指令LEA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%96%E5%9C%B0%E5%9D%80%E6%8C%87%E4%BB%A4LDS%E5%8F%8ALES"><span class="nav-number">5.2.</span> <span class="nav-text">取地址指令LDS及LES</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

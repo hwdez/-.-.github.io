@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="title: 鲲鹏杯复现date: 2024-09-25 19:43:49tags: CTFcategories: CTF 前言:被鲲鹏杯搞晕了，赶紧复现，不然下次遇到了还是不会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/09/25/%E9%B2%B2%E9%B9%8F%E6%9D%AF%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title: 鲲鹏杯复现date: 2024-09-25 19:43:49tags: CTFcategories: CTF 前言:被鲲鹏杯搞晕了，赶紧复现，不然下次遇到了还是不会">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-25T11:46:13.196Z">
+<meta property="article:modified_time" content="2024-10-08T12:45:42.762Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/09/25/%E9%B2%B2%E9%B9%8F%E6%9D%AF%E5%A4%8D%E7%8E%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/25/%E9%B2%B2%E9%B9%8F%E6%9D%AF%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-09-25 19:46:13" itemprop="dateCreated datePublished" datetime="2024-09-25T19:46:13+08:00">2024-09-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-10-08 20:45:42" itemprop="dateModified" datetime="2024-10-08T20:45:42+08:00">2024-10-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>title: 鲲鹏杯复现<br>date: 2024-09-25 19:43:49<br>tags: CTF<br>categories: CTF</p>
+<p>前言:被鲲鹏杯搞晕了，赶紧复现，不然下次遇到了还是不会</p>
+<span id="more"></span>
+
+<h1 id="初赛"><a href="#初赛" class="headerlink" title="初赛"></a>初赛</h1><h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="ez-fermat"><a href="#ez-fermat" class="headerlink" title="ez_fermat"></a>ez_fermat</h3><p>题目如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">813</span>)</span><br><span class="line">n = p * q</span><br><span class="line">d = p</span><br><span class="line">e = inverse(d, (p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">flag = <span class="string">b&#x27;NSSCTF&#123;test_flag&#125;&#x27;</span></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line"><span class="built_in">print</span>(e)</span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">pow</span>(m, e, n))</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">3904054379768621006670325403570678966655298185942026071119847032293541155818374237757771677885218395571231995625009566193044227004214661252741440763224075564545575267406326084344024197161667257443366163987563451174836819677982948383967049594961135059796888603091106117040559333549933923156522162926214187395074971581109581699786654634096916190024297067217856502521108656019066292650847674105723870976455422998577177791829507752873186832882421485628003948270492309102429874674621180956748281541598316433735992507502375267828628254040129556944239703219983</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">3346908455447174070992347616941127803725226412626643481301959623252314393488983877743239835001359838967907152394787518896740138558902876270534420306764838402995141451795721684856954259250045263865518237097216558225597879130005447703355004165638668981119439658709484546611239237700677748062521167324245405513546072909746940831890185954341722008854937777778339786187857409646068034455661780649005707291091511164030224458109751999287771088477121459794784223018351072171477613383398898036040202088356029117418211176259340287391200019380649219787316637601225</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2297172673207318067644454311791059052521405524072070001463617943081937620680287073877519555417893924987805372814004437226029332185689205902364556330396100859963867726856821821201929153299863158902425114650689181400700850662495351899097507167512372167222348638943031627163322963150031484905075884684966357856735997039021272911282595603222713567742142545540368250995582560658624441813641267178033998653769097632742521154569310435572740012678651074392991522280691458449892215626597146075598152312643598829814235896873342805258450617148747956353285414172796&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>一眼顶针：RSA加密</p>
+<p>题目给了n、e、c，要求m的话，得知道私钥d，要私钥d，得知道phi，那就得知道p和q的值了</p>
+<p>在RSA加密算法中，我们知道e和p(d &#x3D; p)是具有$e * p &#x3D; 1 (mod phi)$关系的，根据<strong>模运算的性质</strong>可得：$e * p &#x3D; 1 + k * phi$，根据欧拉定理，有$2 ^ {e*p}\equiv 2^{(1 + k * phi)}\equiv 2\ (mod\ n)$</p>
+<p>解释一下为什么$2^{(1 + k * phi)}\equiv 2\ (mod\ n)$：通常$gcd(2,n) &#x3D; 1$，又根据欧拉定理，$a^{phi}≡1(mod\ n)$，所以$2^{phi} \equiv 1 \ (mod\ n)$，两边同时乘以2就得到原式了</p>
+<p>对于式子：$2 ^ {e*p}\equiv 2\ (mod\ n)$，两边同模p，就得到$2 ^ e \equiv 2\ (mod\ p)\$$(n\ mod\ p &#x3D; 0)$，所以$2 ^ e -2\equiv k * p\ (mod\ n)\$，就可以推出：$p &#x3D; gcd(2 ^ e - 2,\ n)$</p>
+<h3 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h3><h4 id="RE-signin"><a href="#RE-signin" class="headerlink" title="RE_signin"></a>RE_signin</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">0</span>           <span class="number">0</span> RESUME                   <span class="number">0</span></span><br><span class="line"></span><br><span class="line"> <span class="number">1</span>           <span class="number">2</span> LOAD_CONST               <span class="number">0</span> (<span class="string">&#x27;mrl64_l0v3Miku&#x27;</span>)</span><br><span class="line">             <span class="number">4</span> STORE_NAME               <span class="number">0</span> (key)</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>           <span class="number">6</span> BUILD_LIST               <span class="number">0</span></span><br><span class="line">             <span class="number">8</span> LOAD_CONST               <span class="number">1</span> ((<span class="number">221</span>, -<span class="number">25</span>, <span class="number">9072</span>, <span class="number">94</span>, <span class="number">163</span>, -<span class="number">17</span>, <span class="number">10260</span>, <span class="number">0</span>, <span class="number">198</span>, <span class="number">16</span>, <span class="number">8547</span>, <span class="number">13</span>, <span class="number">158</span>, -<span class="number">22</span>, <span class="number">9701</span>, <span class="number">29</span>, <span class="number">193</span>, <span class="number">41</span>, <span class="number">5096</span>, <span class="number">13</span>, <span class="number">219</span>, <span class="number">27</span>, <span class="number">6018</span>, <span class="number">125</span>, <span class="number">172</span>, <span class="number">15</span>, <span class="number">5243</span>, <span class="number">45</span>, <span class="number">182</span>, -<span class="number">19</span>, <span class="number">5292</span>, <span class="number">84</span>, <span class="number">149</span>, -<span class="number">41</span>, <span class="number">10476</span>, <span class="number">4</span>, <span class="number">174</span>, <span class="number">51</span>, <span class="number">4235</span>, <span class="number">12</span>))</span><br><span class="line">            <span class="number">10</span> LIST_EXTEND              <span class="number">1</span></span><br><span class="line">            <span class="number">12</span> STORE_NAME               <span class="number">1</span> (cipher)</span><br><span class="line"></span><br><span class="line"> <span class="number">3</span>          <span class="number">14</span> PUSH_NULL</span><br><span class="line">            <span class="number">16</span> LOAD_NAME                <span class="number">2</span> (<span class="built_in">input</span>)</span><br><span class="line">            <span class="number">18</span> LOAD_CONST               <span class="number">2</span> (<span class="string">&#x27;Input your flag:&gt;&#x27;</span>)</span><br><span class="line">            <span class="number">20</span> CALL                     <span class="number">1</span></span><br><span class="line">            <span class="number">28</span> STORE_NAME               <span class="number">3</span> (flag)</span><br><span class="line"></span><br><span class="line"> <span class="number">4</span>          <span class="number">30</span> BUILD_LIST               <span class="number">0</span></span><br><span class="line">            <span class="number">32</span> STORE_NAME               <span class="number">4</span> (temp)</span><br><span class="line"></span><br><span class="line"> <span class="number">6</span>          <span class="number">34</span> PUSH_NULL</span><br><span class="line">            <span class="number">36</span> LOAD_NAME                <span class="number">5</span> (<span class="built_in">len</span>)</span><br><span class="line">            <span class="number">38</span> LOAD_NAME                <span class="number">3</span> (flag)</span><br><span class="line">            <span class="number">40</span> CALL                     <span class="number">1</span></span><br><span class="line">            <span class="number">48</span> LOAD_CONST               <span class="number">3</span> (<span class="number">40</span>)</span><br><span class="line">            <span class="number">50</span> COMPARE_OP              <span class="number">55</span> (!=)</span><br><span class="line">            <span class="number">54</span> POP_JUMP_IF_FALSE       <span class="number">15</span> (to <span class="number">86</span>)</span><br><span class="line"></span><br><span class="line"> <span class="number">7</span>          <span class="number">56</span> PUSH_NULL</span><br><span class="line">            <span class="number">58</span> LOAD_NAME                <span class="number">6</span> (<span class="built_in">print</span>)</span><br><span class="line">            <span class="number">60</span> LOAD_CONST               <span class="number">4</span> (<span class="string">&#x27;Incorret!&#x27;</span>)</span><br><span class="line">            <span class="number">62</span> CALL                     <span class="number">1</span></span><br><span class="line">            <span class="number">70</span> POP_TOP</span><br><span class="line"></span><br><span class="line"> <span class="number">8</span>          <span class="number">72</span> PUSH_NULL</span><br><span class="line">            <span class="number">74</span> LOAD_NAME                <span class="number">7</span> (exit)</span><br><span class="line">            <span class="number">76</span> CALL                     <span class="number">0</span></span><br><span class="line">            <span class="number">84</span> POP_TOP</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>     &gt;&gt;   <span class="number">86</span> PUSH_NULL</span><br><span class="line">            <span class="number">88</span> LOAD_NAME                <span class="number">8</span> (<span class="built_in">range</span>)</span><br><span class="line">            <span class="number">90</span> LOAD_CONST               <span class="number">5</span> (<span class="number">0</span>)</span><br><span class="line">            <span class="number">92</span> PUSH_NULL</span><br><span class="line">            <span class="number">94</span> LOAD_NAME                <span class="number">5</span> (<span class="built_in">len</span>)</span><br><span class="line">            <span class="number">96</span> LOAD_NAME                <span class="number">3</span> (flag)</span><br><span class="line">            <span class="number">98</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">106</span> CALL                     <span class="number">2</span></span><br><span class="line">           <span class="number">114</span> GET_ITER</span><br><span class="line">       &gt;&gt;  <span class="number">116</span> FOR_ITER               <span class="number">189</span> (to <span class="number">498</span>)</span><br><span class="line">           <span class="number">120</span> STORE_NAME               <span class="number">9</span> (i)</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>         <span class="number">122</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">124</span> LOAD_CONST               <span class="number">6</span> (<span class="number">4</span>)</span><br><span class="line">           <span class="number">126</span> BINARY_OP                <span class="number">6</span> (%)</span><br><span class="line">           <span class="number">130</span> STORE_NAME              <span class="number">10</span> (base)</span><br><span class="line"></span><br><span class="line"><span class="number">12</span>         <span class="number">132</span> LOAD_NAME               <span class="number">10</span> (base)</span><br><span class="line">           <span class="number">134</span> LOAD_CONST               <span class="number">5</span> (<span class="number">0</span>)</span><br><span class="line">           <span class="number">136</span> COMPARE_OP              <span class="number">40</span> (==)</span><br><span class="line">           <span class="number">140</span> POP_JUMP_IF_FALSE       <span class="number">42</span> (to <span class="number">226</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">13</span>         <span class="number">142</span> LOAD_NAME                <span class="number">4</span> (temp)</span><br><span class="line">           <span class="number">144</span> LOAD_ATTR               <span class="number">23</span> (NULL|self + append)</span><br><span class="line">           <span class="number">164</span> PUSH_NULL</span><br><span class="line">           <span class="number">166</span> LOAD_NAME               <span class="number">12</span> (<span class="built_in">ord</span>)</span><br><span class="line">           <span class="number">168</span> LOAD_NAME                <span class="number">3</span> (flag)</span><br><span class="line">           <span class="number">170</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">172</span> BINARY_SUBSCR</span><br><span class="line">           <span class="number">176</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">184</span> PUSH_NULL</span><br><span class="line">           <span class="number">186</span> LOAD_NAME               <span class="number">12</span> (<span class="built_in">ord</span>)</span><br><span class="line">           <span class="number">188</span> LOAD_NAME                <span class="number">0</span> (key)</span><br><span class="line">           <span class="number">190</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">192</span> LOAD_CONST               <span class="number">7</span> (<span class="number">14</span>)</span><br><span class="line">           <span class="number">194</span> BINARY_OP                <span class="number">6</span> (%)</span><br><span class="line">           <span class="number">198</span> BINARY_SUBSCR</span><br><span class="line">           <span class="number">202</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">210</span> BINARY_OP                <span class="number">0</span> (+)</span><br><span class="line">           <span class="number">214</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">222</span> POP_TOP</span><br><span class="line">           <span class="number">224</span> JUMP_BACKWARD           <span class="number">55</span> (to <span class="number">116</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">14</span>     &gt;&gt;  <span class="number">226</span> LOAD_NAME               <span class="number">10</span> (base)</span><br><span class="line">           <span class="number">228</span> LOAD_CONST               <span class="number">8</span> (<span class="number">1</span>)</span><br><span class="line">           <span class="number">230</span> COMPARE_OP              <span class="number">40</span> (==)</span><br><span class="line">           <span class="number">234</span> POP_JUMP_IF_FALSE       <span class="number">42</span> (to <span class="number">320</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">15</span>         <span class="number">236</span> LOAD_NAME                <span class="number">4</span> (temp)</span><br><span class="line">           <span class="number">238</span> LOAD_ATTR               <span class="number">23</span> (NULL|self + append)</span><br><span class="line">           <span class="number">258</span> PUSH_NULL</span><br><span class="line">           <span class="number">260</span> LOAD_NAME               <span class="number">12</span> (<span class="built_in">ord</span>)</span><br><span class="line">           <span class="number">262</span> LOAD_NAME                <span class="number">3</span> (flag)</span><br><span class="line">           <span class="number">264</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">266</span> BINARY_SUBSCR</span><br><span class="line">           <span class="number">270</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">278</span> PUSH_NULL</span><br><span class="line">           <span class="number">280</span> LOAD_NAME               <span class="number">12</span> (<span class="built_in">ord</span>)</span><br><span class="line">           <span class="number">282</span> LOAD_NAME                <span class="number">0</span> (key)</span><br><span class="line">           <span class="number">284</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">286</span> LOAD_CONST               <span class="number">7</span> (<span class="number">14</span>)</span><br><span class="line">           <span class="number">288</span> BINARY_OP                <span class="number">6</span> (%)</span><br><span class="line">           <span class="number">292</span> BINARY_SUBSCR</span><br><span class="line">           <span class="number">296</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">304</span> BINARY_OP               <span class="number">10</span> (-)</span><br><span class="line">           <span class="number">308</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">316</span> POP_TOP</span><br><span class="line">           <span class="number">318</span> JUMP_BACKWARD          <span class="number">102</span> (to <span class="number">116</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">16</span>     &gt;&gt;  <span class="number">320</span> LOAD_NAME               <span class="number">10</span> (base)</span><br><span class="line">           <span class="number">322</span> LOAD_CONST               <span class="number">9</span> (<span class="number">2</span>)</span><br><span class="line">           <span class="number">324</span> COMPARE_OP              <span class="number">40</span> (==)</span><br><span class="line">           <span class="number">328</span> POP_JUMP_IF_FALSE       <span class="number">42</span> (to <span class="number">414</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">17</span>         <span class="number">330</span> LOAD_NAME                <span class="number">4</span> (temp)</span><br><span class="line">           <span class="number">332</span> LOAD_ATTR               <span class="number">23</span> (NULL|self + append)</span><br><span class="line">           <span class="number">352</span> PUSH_NULL</span><br><span class="line">           <span class="number">354</span> LOAD_NAME               <span class="number">12</span> (<span class="built_in">ord</span>)</span><br><span class="line">           <span class="number">356</span> LOAD_NAME                <span class="number">3</span> (flag)</span><br><span class="line">           <span class="number">358</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">360</span> BINARY_SUBSCR</span><br><span class="line">           <span class="number">364</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">372</span> PUSH_NULL</span><br><span class="line">           <span class="number">374</span> LOAD_NAME               <span class="number">12</span> (<span class="built_in">ord</span>)</span><br><span class="line">           <span class="number">376</span> LOAD_NAME                <span class="number">0</span> (key)</span><br><span class="line">           <span class="number">378</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">380</span> LOAD_CONST               <span class="number">7</span> (<span class="number">14</span>)</span><br><span class="line">           <span class="number">382</span> BINARY_OP                <span class="number">6</span> (%)</span><br><span class="line">           <span class="number">386</span> BINARY_SUBSCR</span><br><span class="line">           <span class="number">390</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">398</span> BINARY_OP                <span class="number">5</span> (*)</span><br><span class="line">           <span class="number">402</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">410</span> POP_TOP</span><br><span class="line">           <span class="number">412</span> JUMP_BACKWARD          <span class="number">149</span> (to <span class="number">116</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">19</span>     &gt;&gt;  <span class="number">414</span> LOAD_NAME                <span class="number">4</span> (temp)</span><br><span class="line">           <span class="number">416</span> LOAD_ATTR               <span class="number">23</span> (NULL|self + append)</span><br><span class="line">           <span class="number">436</span> PUSH_NULL</span><br><span class="line">           <span class="number">438</span> LOAD_NAME               <span class="number">12</span> (<span class="built_in">ord</span>)</span><br><span class="line">           <span class="number">440</span> LOAD_NAME                <span class="number">3</span> (flag)</span><br><span class="line">           <span class="number">442</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">444</span> BINARY_SUBSCR</span><br><span class="line">           <span class="number">448</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">456</span> PUSH_NULL</span><br><span class="line">           <span class="number">458</span> LOAD_NAME               <span class="number">12</span> (<span class="built_in">ord</span>)</span><br><span class="line">           <span class="number">460</span> LOAD_NAME                <span class="number">0</span> (key)</span><br><span class="line">           <span class="number">462</span> LOAD_NAME                <span class="number">9</span> (i)</span><br><span class="line">           <span class="number">464</span> LOAD_CONST               <span class="number">7</span> (<span class="number">14</span>)</span><br><span class="line">           <span class="number">466</span> BINARY_OP                <span class="number">6</span> (%)</span><br><span class="line">           <span class="number">470</span> BINARY_SUBSCR</span><br><span class="line">           <span class="number">474</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">482</span> BINARY_OP               <span class="number">12</span> (^)</span><br><span class="line">           <span class="number">486</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">494</span> POP_TOP</span><br><span class="line">           <span class="number">496</span> JUMP_BACKWARD          <span class="number">191</span> (to <span class="number">116</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>     &gt;&gt;  <span class="number">498</span> END_FOR</span><br><span class="line"></span><br><span class="line"><span class="number">21</span>         <span class="number">500</span> LOAD_NAME                <span class="number">4</span> (temp)</span><br><span class="line">           <span class="number">502</span> LOAD_NAME                <span class="number">1</span> (cipher)</span><br><span class="line">           <span class="number">504</span> COMPARE_OP              <span class="number">55</span> (!=)</span><br><span class="line">           <span class="number">508</span> POP_JUMP_IF_FALSE       <span class="number">15</span> (to <span class="number">540</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">22</span>         <span class="number">510</span> PUSH_NULL</span><br><span class="line">           <span class="number">512</span> LOAD_NAME                <span class="number">6</span> (<span class="built_in">print</span>)</span><br><span class="line">           <span class="number">514</span> LOAD_CONST               <span class="number">4</span> (<span class="string">&#x27;Incorret!&#x27;</span>)</span><br><span class="line">           <span class="number">516</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">524</span> POP_TOP</span><br><span class="line"></span><br><span class="line"><span class="number">23</span>         <span class="number">526</span> PUSH_NULL</span><br><span class="line">           <span class="number">528</span> LOAD_NAME                <span class="number">7</span> (exit)</span><br><span class="line">           <span class="number">530</span> CALL                     <span class="number">0</span></span><br><span class="line">           <span class="number">538</span> POP_TOP</span><br><span class="line"></span><br><span class="line"><span class="number">25</span>     &gt;&gt;  <span class="number">540</span> PUSH_NULL</span><br><span class="line">           <span class="number">542</span> LOAD_NAME                <span class="number">6</span> (<span class="built_in">print</span>)</span><br><span class="line">           <span class="number">544</span> LOAD_CONST              <span class="number">10</span> (<span class="string">&#x27;Corret!!!&#x27;</span>)</span><br><span class="line">           <span class="number">546</span> CALL                     <span class="number">1</span></span><br><span class="line">           <span class="number">554</span> POP_TOP</span><br><span class="line">           <span class="number">556</span> RETURN_CONST            <span class="number">11</span> (<span class="literal">None</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>搜一下就知道这个是python的opcode，可以用AI来帮你还原成python代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">key = <span class="string">&#x27;mrl64_l0v3Miku&#x27;</span></span><br><span class="line">cipher = [<span class="number">221</span>, -<span class="number">25</span>, <span class="number">9072</span>, <span class="number">94</span>, <span class="number">163</span>, -<span class="number">17</span>, <span class="number">10260</span>, <span class="number">0</span>, <span class="number">198</span>, <span class="number">16</span>, <span class="number">8547</span>, <span class="number">13</span>, <span class="number">158</span>, -<span class="number">22</span>,</span><br><span class="line"><span class="number">9701</span>, <span class="number">29</span>, <span class="number">193</span>, <span class="number">41</span>, <span class="number">5096</span>, <span class="number">13</span>, <span class="number">219</span>, <span class="number">27</span>, <span class="number">6018</span>, <span class="number">125</span>, <span class="number">172</span>, <span class="number">15</span>, <span class="number">5243</span>, <span class="number">45</span>, <span class="number">182</span>, -<span class="number">19</span>,</span><br><span class="line"><span class="number">5292</span>, <span class="number">84</span>, <span class="number">149</span>, -<span class="number">41</span>, <span class="number">10476</span>, <span class="number">4</span>, <span class="number">174</span>, <span class="number">51</span>, <span class="number">4235</span>, <span class="number">12</span>]</span><br><span class="line">flag = <span class="built_in">input</span>(<span class="string">&#x27;Input your flag:&gt;&#x27;</span>)</span><br><span class="line">temp = []</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(flag) != <span class="number">40</span>:</span><br><span class="line">     <span class="built_in">print</span>(<span class="string">&#x27;Incorrect!&#x27;</span>)</span><br><span class="line">     exit()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(flag)):</span><br><span class="line">    base = i % <span class="number">4</span></span><br><span class="line">    <span class="keyword">if</span> base == <span class="number">0</span>:</span><br><span class="line">         temp.append(<span class="built_in">ord</span>(flag[i]) + <span class="built_in">ord</span>(key[i % <span class="number">14</span>]))</span><br><span class="line">    <span class="keyword">elif</span> base == <span class="number">1</span>:</span><br><span class="line">         temp.append(<span class="built_in">ord</span>(flag[i]) - <span class="built_in">ord</span>(key[i % <span class="number">14</span>]))</span><br><span class="line">    <span class="keyword">elif</span> base == <span class="number">2</span>:</span><br><span class="line">         temp.append(<span class="built_in">ord</span>(flag[i]) * <span class="built_in">ord</span>(key[i % <span class="number">14</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">         temp.append(<span class="built_in">ord</span>(flag[i]) ^ <span class="built_in">ord</span>(key[i % <span class="number">14</span>]))</span><br><span class="line"><span class="keyword">if</span> temp != cipher:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Incorrect!&#x27;</span>)</span><br><span class="line">    exit()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Correct!!!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>大概就是根据flag中每个元素的下表分成0、1、2、3四组，每组转为ASCII值，跟key中对应的转为ASCII的元素进行四种运算，最终组合成cipher。</p>
+<p>分析完就可以写逆向的代码了：将cipher中的每个元素根据下表分为4组，和key对应的元素的ASCII进行相反的四种运算，再转为字符串就可以了。</p>
+<p>这是手搓的exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cipher = [<span class="number">221</span>, -<span class="number">25</span>, <span class="number">9072</span>, <span class="number">94</span>, <span class="number">163</span>, -<span class="number">17</span>, <span class="number">10260</span>, <span class="number">0</span>, <span class="number">198</span>, <span class="number">16</span>, <span class="number">8547</span>, <span class="number">13</span>, <span class="number">158</span>, -<span class="number">22</span>, <span class="number">9701</span>, <span class="number">29</span>, <span class="number">193</span>, <span class="number">41</span>, <span class="number">5096</span>, <span class="number">13</span>, <span class="number">219</span>, <span class="number">27</span>, <span class="number">6018</span>, <span class="number">125</span>, <span class="number">172</span>, <span class="number">15</span>, <span class="number">5243</span>, <span class="number">45</span>, <span class="number">182</span>, -<span class="number">19</span>, <span class="number">5292</span>, <span class="number">84</span>, <span class="number">149</span>, -<span class="number">41</span>, <span class="number">10476</span>, <span class="number">4</span>, <span class="number">174</span>, <span class="number">51</span>, <span class="number">4235</span>, <span class="number">12</span>]</span><br><span class="line">key = <span class="string">&#x27;mrl64_l0v3Miku&#x27;</span></span><br><span class="line">flag = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(cipher)):</span><br><span class="line">    base = i % <span class="number">4</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> base == <span class="number">0</span>:</span><br><span class="line">        flag.append(<span class="built_in">chr</span>((cipher[i] - <span class="built_in">ord</span>(key[i%<span class="number">14</span>]))))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> base == <span class="number">1</span>:</span><br><span class="line">        flag.append(<span class="built_in">chr</span>((cipher[i] + <span class="built_in">ord</span>(key[i%<span class="number">14</span>]))))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> base == <span class="number">2</span>:</span><br><span class="line">        flag.append(<span class="built_in">chr</span>((cipher[i] // <span class="built_in">ord</span>(key[i%<span class="number">14</span>]))))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> base == <span class="number">3</span>:</span><br><span class="line">        flag.append(<span class="built_in">chr</span>((cipher[i] ^ <span class="built_in">ord</span>(key[i%<span class="number">14</span>]))))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.join(flag))</span><br></pre></td></tr></table></figure>
+
+<p>这是官方的exp：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; cipher = &#123;<span class="number">221</span>, <span class="number">-25</span>, <span class="number">9072</span>, <span class="number">94</span>, <span class="number">163</span>, <span class="number">-17</span>, <span class="number">10260</span>, <span class="number">0</span>, <span class="number">198</span>, <span class="number">16</span>, <span class="number">8547</span>,</span><br><span class="line"><span class="number">13</span>, <span class="number">158</span>, <span class="number">-22</span>, <span class="number">9701</span>, <span class="number">29</span>, <span class="number">193</span>, <span class="number">41</span>, <span class="number">5096</span>, <span class="number">13</span>, <span class="number">219</span>, <span class="number">27</span>, <span class="number">6018</span>, <span class="number">125</span>, <span class="number">172</span>, <span class="number">15</span>, <span class="number">5243</span>,</span><br><span class="line"><span class="number">45</span>, <span class="number">182</span>, <span class="number">-19</span>, <span class="number">5292</span>, <span class="number">84</span>, <span class="number">149</span>, <span class="number">-41</span>, <span class="number">10476</span>, <span class="number">4</span>, <span class="number">174</span>, <span class="number">51</span>, <span class="number">4235</span>, <span class="number">12</span>&#125;;</span><br><span class="line">    <span class="built_in">string</span> key = <span class="string">&quot;mrl64_l0v3Miku&quot;</span>;</span><br><span class="line">	<span class="built_in">string</span> flag;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; cipher.size(); i++)&#123;</span><br><span class="line">		<span class="keyword">switch</span>(i % <span class="number">4</span>)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span>: flag.push_back(cipher[i] - key[i%<span class="number">14</span>]); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>: flag.push_back(cipher[i] + key[i%<span class="number">14</span>]); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>: flag.push_back(cipher[i] / key[i%<span class="number">14</span>]); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>: flag.push_back(cipher[i] ^ key[i%<span class="number">14</span>]); <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; flag;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>PS：写代码的能力是要有的，不是所有的exp都能通过AI给你写出来。所以，从简单的练起</strong></p>
+<h4 id="🎲"><a href="#🎲" class="headerlink" title="🎲"></a>🎲</h4><h2 id="决赛"><a href="#决赛" class="headerlink" title="决赛"></a>决赛</h2><h3 id="RE"><a href="#RE" class="headerlink" title="RE"></a>RE</h3><h4 id="REsignin-revenge"><a href="#REsignin-revenge" class="headerlink" title="REsignin_revenge"></a>REsignin_revenge</h4><p>给了一串以太坊字节码(看不出来就问问AI)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x600601d9050611ce3016022016020901b6309a90782600202017fffffffffffffffffffffffffffffffffffffffffffffffffffffa7a7b3cfa9cc191865666666abcdef653a1e2d49f19665123456789abc654d494b55585918180600</span><br></pre></td></tr></table></figure>
+
+<p>我们不妨先来了解一下什么是<strong>以太坊</strong>？</p>
+<ul>
+<li><strong>以太坊</strong>是一条区块链，其中嵌入了计算机。它是以去中心化、无需许可、抗审查的方式构建应用程序和组织的基础。</li>
+<li>在以太坊宇宙中，有一台规范化计算机(被称为以太坊虚拟机，即EVM)，其状态的得到以太坊网络中所有人的一致同意。每个参与以太坊网络的人(每个以太坊节点)都会保存一份该计算机的状态。</li>
+<li>**以太币(ETH)**是以太坊上的原生加密货币。目的是允许计算市场化</li>
+<li><strong>智能合约</strong>就相当于一种自动售货机：通过特认定参数调用脚本后，如果满足某些特定条件，就会执行一些操作</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://goerli.etherscan.io/opcode-tool">用这个Bytecode to Opcode Disassembler | Etherscan</a>就可以反编译出opcode</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">[1] PUSH1 0x06</span><br><span class="line">[2] ADD</span><br><span class="line">[3] &#x27;d9&#x27;(Unknown Opcode)</span><br><span class="line">[4] SDIV</span><br><span class="line">[5] MOD</span><br><span class="line">[6] GT</span><br><span class="line">[7] &#x27;ce&#x27;(Unknown Opcode)</span><br><span class="line">[8] ADDRESS</span><br><span class="line">[9] AND</span><br><span class="line">[10] MUL</span><br><span class="line">[11] SHA3</span><br><span class="line">[12] AND</span><br><span class="line">[13] MUL</span><br><span class="line">[14] MULMOD</span><br><span class="line">[15] ADD</span><br><span class="line">[16] &#x27;b6&#x27;(Unknown Opcode)</span><br><span class="line">[17] ADDRESS</span><br><span class="line">[18] SWAP11</span><br><span class="line">[19] SWAP1</span><br><span class="line">[45] PUSH25 0x2600202017ffffffffffffffffffffffffffffffffffffffff</span><br><span class="line">[46] SELFDESTRUCT</span><br><span class="line">[47] SELFDESTRUCT</span><br><span class="line">[48] SELFDESTRUCT</span><br><span class="line">[49] SELFDESTRUCT</span><br><span class="line">[50] SELFDESTRUCT</span><br><span class="line">[51] SELFDESTRUCT</span><br><span class="line">[52] STATICCALL</span><br><span class="line">[80] PUSH27 0x7b3cfa9cc191865666666abcdef653a1e2d49f19665123456789ab</span><br><span class="line">[81] &#x27;c6&#x27;(Unknown Opcode)</span><br><span class="line">[82] SLOAD</span><br><span class="line">[83] &#x27;d4&#x27;(Unknown Opcode)</span><br><span class="line">[84] SWAP5</span><br><span class="line">[85] &#x27;b5&#x27;(Unknown Opcode)</span><br><span class="line">[86] SSTORE</span><br><span class="line">[87] DUP6</span><br><span class="line">[88] SWAP2</span><br><span class="line">[89] DUP2</span><br><span class="line">[90] DUP1</span><br><span class="line">[92] PUSH1 0x0</span><br></pre></td></tr></table></figure>
+
+<p>对照<a target="_blank" rel="noopener" href="https://ethereum.org/zh/developers/docs/evm/opcodes/%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E6%89%8B%E6%92%95%E5%B0%B1%E8%83%BD%E5%81%9A%E5%87%BA%E6%9D%A5%E4%BA%86">https://ethereum.org/zh/developers/docs/evm/opcodes/一步一步手撕就能做出来了</a></p>
+<h4 id="ezam-plus"><a href="#ezam-plus" class="headerlink" title="ezam_plus"></a>ezam_plus</h4>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/09/02/Crypto%E4%B9%8BRSA/" rel="prev" title="Crypto之RSA算法原理">
+      <i class="fa fa-chevron-left"></i> Crypto之RSA算法原理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/09/29/java%E4%B9%8B%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" rel="next" title="java之异常处理">
+      java之异常处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E8%B5%9B"><span class="nav-number">1.</span> <span class="nav-text">初赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto"><span class="nav-number">1.1.</span> <span class="nav-text">Crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ez-fermat"><span class="nav-number">1.1.1.</span> <span class="nav-text">ez_fermat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reverse"><span class="nav-number">1.1.2.</span> <span class="nav-text">Reverse</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RE-signin"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">RE_signin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%8E%B2"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">🎲</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E8%B5%9B"><span class="nav-number">1.2.</span> <span class="nav-text">决赛</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RE"><span class="nav-number">1.2.1.</span> <span class="nav-text">RE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#REsignin-revenge"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">REsignin_revenge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ezam-plus"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">ezam_plus</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
