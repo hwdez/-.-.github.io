@@ -201,10 +201,10 @@
         <p><strong>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Ada, Go, and D, as well as libraries for these languages</strong> </p>
 <span id="more"></span>
 
-<h3 id="基本命令格式"><a href="#基本命令格式" class="headerlink" title="基本命令格式"></a>基本命令格式</h3><p>gcc(g++) <options>  <sourcefiles></p>
+<h3 id="基本命令格式"><a href="#基本命令格式" class="headerlink" title="基本命令格式"></a>基本命令格式</h3><p>gcc(g++) <options>  <sourcefiles></sourcefiles></options></p>
 <p>   options</p>
 <ul>
-<li>-o <filesname>                                   指定文件夹</li>
+<li>-o <filesname>                                   指定文件夹</filesname></li>
 <li>-fexec - charset &#x3D; GBK                          指定运行编码</li>
 <li>-finput - charset &#x3D; UTF - 8                    指定源文件编码</li>
 <li>-W                                                        输出警告信息</li>
@@ -213,24 +213,24 @@
 <li>-S                                                             编译过程到编译</li>
 <li>-c                                                             编译过程到汇编</li>
 <li>-static                                                     静态链接</li>
-<li>-I <dir>                                                 指定头文件搜索路径</li>
-<li>-L <dir>                                                指定库文件搜索路径</li>
-<li>-Wl, -rpath, <libpath>                      指定运行时动态链接搜索库(Linux有效)      -Wl指定的是链接的选项，支持的选项用ld   -help查看</li>
+<li>-I <dir>                                                 指定头文件搜索路径</dir></li>
+<li>-L <dir>                                                指定库文件搜索路径</dir></li>
+<li>-Wl, -rpath, <libpath>                      指定运行时动态链接搜索库(Linux有效)      -Wl指定的是链接的选项，支持的选项用ld   -help查看</libpath></li>
 </ul>
 <hr>
 <h3 id="静态链接库"><a href="#静态链接库" class="headerlink" title="静态链接库"></a>静态链接库</h3><ol>
-<li>命名        lib <name> .a   (具体库的名字)</li>
+<li>命名        lib <name> .a   (具体库的名字)</name></li>
 <li>生成        ar rcs libfun.a  fun1.o fun.o    (lib+静态链接库的名字)</li>
-<li>使用        gcc main.c -L<dir>  -lfun   或  gcc main.c <dir>&#x2F;libfun.a   (<dir>是路径)</li>
+<li>使用        gcc main.c -L<dir>  -lfun   或  gcc main.c <dir>&#x2F;libfun.a   (<dir>是路径)</dir></dir></dir></li>
 </ol>
 <h3 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h3><ol>
-<li>命名        lib<name>.dll&#x2F;lib<name>.so    (在Windows上的后缀是.dll；在Linux上的后缀是.so)</li>
+<li>命名        lib<name>.dll&#x2F;lib<name>.so    (在Windows上的后缀是.dll；在Linux上的后缀是.so)</name></name></li>
 <li>生成        gcc -fPIC  -shared   -olibfun.dll   fun.c    (fPIC：位置无关的代码)</li>
 </ol>
 <p>​                       gcc -c   -fPIC  fun.c</p>
 <p>​                       gcc -o libfun.dll  -shared  fun.o</p>
 <p>​                                  加上   -Wl, –out - implib,libfun.dll.a</p>
-<p>使用              gcc main.c  -L <dir>  -lfun 或 gcc main.c <dir>&#x2F;libfun.dll</p>
+<p>使用              gcc main.c  -L <dir>  -lfun 或 gcc main.c <dir>&#x2F;libfun.dll</dir></dir></p>
 
     </div>
 
@@ -328,7 +328,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
