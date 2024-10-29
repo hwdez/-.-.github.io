@@ -17,33 +17,33 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hwdez.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="前言：学习8086指令体系中的寄存器组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="x86指令体系中的寄存器组">
-<meta property="og:url" content="http://example.com/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84/index.html">
+<meta property="og:url" content="https://hwdez.github.io/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言：学习8086指令体系中的寄存器组">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/c857d09010d16b354e1a96a6d562aba5.jpeg">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/0f1bf71cc3294da0ee33c124f0ee361f.jpeg">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/3b52a747b16c4d66aee5036534e3a557.png">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/da9888f5ba6a4b86b362279e262c5ca7.png">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/ff7d7db950944ef38977bf43257c2174.png">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/1539d19707ef279a717f8c596a5efc3c.jpeg">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/015b6bc2986d42ed91fb76a1ffb30a41.png">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/image-20240410195900292.png">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/image-20240410204037139.png">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/c857d09010d16b354e1a96a6d562aba5.jpeg">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/0f1bf71cc3294da0ee33c124f0ee361f.jpeg">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/3b52a747b16c4d66aee5036534e3a557.png">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/da9888f5ba6a4b86b362279e262c5ca7.png">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/ff7d7db950944ef38977bf43257c2174.png">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/1539d19707ef279a717f8c596a5efc3c.jpeg">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/015b6bc2986d42ed91fb76a1ffb30a41.png">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/image-20240410195900292.png">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/image-20240410204037139.png">
 <meta property="article:published_time" content="2024-03-23T12:42:47.000Z">
 <meta property="article:modified_time" content="2024-04-17T01:14:02.352Z">
 <meta property="article:author" content="hwdez">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/c857d09010d16b354e1a96a6d562aba5.jpeg">
+<meta name="twitter:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/c857d09010d16b354e1a96a6d562aba5.jpeg">
 
-<link rel="canonical" href="http://example.com/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84/">
+<link rel="canonical" href="https://hwdez.github.io/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84/">
 
 
 <script id="page-configurations">
@@ -161,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84/">
+    <link itemprop="mainEntityOfPage" href="https://hwdez.github.io/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -218,7 +218,7 @@
 <span id="more"></span>
 
 <p><strong>首先，寄存器是什么？</strong></p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/c857d09010d16b354e1a96a6d562aba5.jpeg" alt="img"></p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/c857d09010d16b354e1a96a6d562aba5.jpeg" alt="img"></p>
 <p><strong>我们通过CPU构造来引入。</strong></p>
 <p>这是CPU内部的构造。从逻辑上，CPU可以分为三个模块，分别是<code>控制单元</code>、<code>运算单元</code>和</p>
 <p><code>存储单元</code>，三者由CPU内部总线连接起来。</p>
@@ -230,17 +230,17 @@
 <p><code>结果写回</code>：将执行指令阶段的运行结果数据写回到CPU的内部寄存器中，一边后续的指令快速读取。</p>
 <hr>
 <p><strong>可以看出，CPU工作的过程中离不开寄存器，它具有存储数据的功能，接下来我们详细介绍</strong></p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/0f1bf71cc3294da0ee33c124f0ee361f.jpeg" alt="img"></p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/0f1bf71cc3294da0ee33c124f0ee361f.jpeg" alt="img"></p>
 <p>寄存器在读取数据的速度是非常快的。我们以intel 8086处理器为例分析，8086</p>
 <p>处理器是x86架构的前身。在8086CPU中，地址底线达到20根，最大寻址能力可以达到2^20次幂也就是1MB的寻址能力。</p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/3b52a747b16c4d66aee5036534e3a557.png" alt="8086的内部结构"></p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/da9888f5ba6a4b86b362279e262c5ca7.png" alt="8086的寄存器"></p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/3b52a747b16c4d66aee5036534e3a557.png" alt="8086的内部结构"></p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/da9888f5ba6a4b86b362279e262c5ca7.png" alt="8086的寄存器"></p>
 <p>从这幅图中，我们大概可以将寄存器分为通用寄存器，段寄存器，控制寄存器。</p>
 <hr>
 <h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><p>通用寄存器在处理器中数量较多，使用频率较高，具有多种用途。通用寄存器主要分为三种：数据寄存器，变址寄存器，指针寄存器。还有标志寄存器和指令指针。</p>
 <p>8086处理器有8个16位通用寄存器：AX、BX、CX、DX、SI、DI、BP、SP</p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/ff7d7db950944ef38977bf43257c2174.png" alt="在这里插入图片描述"></p>
-<p>前四个通用寄存器主要是用来储存数据。8086CPU的上一代是8080，8080是一类8位的CPU，为了保证兼容性，8086在8080上做了小的修改，这些都是由两个独立的8位寄存器组成。<img src="/.com//imgs/$%7Bfiilename%7D/1539d19707ef279a717f8c596a5efc3c.jpeg" alt="img"></p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/ff7d7db950944ef38977bf43257c2174.png" alt="在这里插入图片描述"></p>
+<p>前四个通用寄存器主要是用来储存数据。8086CPU的上一代是8080，8080是一类8位的CPU，为了保证兼容性，8086在8080上做了小的修改，这些都是由两个独立的8位寄存器组成。<img src="/.io//imgs/$%7Bfiilename%7D/1539d19707ef279a717f8c596a5efc3c.jpeg" alt="img"></p>
 <p><strong>以AX为例，AL是AX的低8位，AH是AX的高八位。同理可得，EAX、EBX、ECX、EDX这些32位数据寄存器中，AX、BX、CX、DX分别是对应的低16位。</strong></p>
 <p>8086可以存储两种类型的数据：</p>
 <p>1、字节(BYTE)：一个字节由8bit组成。</p>
@@ -293,7 +293,7 @@
 <h4 id="IP寄存器"><a href="#IP寄存器" class="headerlink" title="IP寄存器"></a>IP寄存器</h4><p>IP(Instruction Pointer)为<strong>指令指针寄存器</strong>，它用来存放代码段的偏移地址。在程序运行的过程中，它<u>始终指向下一条指令的首地址</u>。</p>
 <p><strong>它与段寄存器CS联合使用确定下一条指令的物理地址</strong>。当这一地址送到存储器后，控制器可以获取下一条要执行的指令，而控制器一旦<u>取得这条指令就马上修改IP的内容</u>，使它<u>指向下一条指令的首地址</u>。</p>
 <h4 id="PSW寄存器"><a href="#PSW寄存器" class="headerlink" title="PSW寄存器"></a>PSW寄存器</h4><p>PSW(Program Status Word)又叫做<strong>程序状态字寄存器</strong>，或叫做**标志寄存器(FLAGS)**。这是一个存放状态(或称条件码)标志、控制标志的寄存器。</p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/015b6bc2986d42ed91fb76a1ffb30a41.png" alt="请添加图片描述">分为6个状态标志位和3个控制标志位</p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/015b6bc2986d42ed91fb76a1ffb30a41.png" alt="请添加图片描述">分为6个状态标志位和3个控制标志位</p>
 <p>6个状态标志位:**CF(Carry Flag)<strong>、</strong>AF(Auxiliary Carry Flag)<strong>、</strong>OF(Overflow Flag)<strong>、</strong>ZF(Zero Flag)<strong>、</strong>SF(Sign Flag)<strong>、</strong>PF(Parity Flag)**。</p>
 <p>3个控制方向位:**DF(Direction Flag)<strong>、</strong>IF(Interrupt Flag)<strong>、</strong>TF(Trap Flag)**。</p>
 <p>下面将详细介绍每个标志位的用途及表现方式。</p>
@@ -303,12 +303,12 @@
 
 <p>如这段代码所示，经过计(al)的值为197超出8位的表示范围，所以此时OF&#x3D;1，值应该为197-256&#x3D;-59</p>
 <h5 id="SF-Sign-Flag"><a href="#SF-Sign-Flag" class="headerlink" title="SF(Sign Flag)"></a>SF(Sign Flag)</h5><p>SF是<strong>符号标志位</strong>。用于记录结果的符号，<strong>结果为负时SF位置1，否则置0</strong>。(<strong>针对有符号数的计算</strong>)。</p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/image-20240410195900292.png" alt="image-20240410195900292"></p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/image-20240410195900292.png" alt="image-20240410195900292"></p>
 <h5 id="ZF-Zero-Flag"><a href="#ZF-Zero-Flag" class="headerlink" title="ZF(Zero Flag)"></a>ZF(Zero Flag)</h5><p>ZF是<strong>零标志位</strong>。<strong>当运算结果为0的时候，ZF置1，否则置0</strong>。本标注常用于分支程序或者循环程序的转移控制中。</p>
 <h5 id="CF-Carry-Flag"><a href="#CF-Carry-Flag" class="headerlink" title="CF(Carry Flag)"></a>CF(Carry Flag)</h5><p>CF是<strong>进位标志</strong>。这个标志位主要是记录<strong>运算时从最高位有效位产生的进位&#x2F;借位值</strong>。<strong>此时CF置1，否则置0</strong>。程序通常会根据CF标志位的状态决定程序是否转移。</p>
 <h5 id="AF-Auxiliary-Carry-Flag"><a href="#AF-Auxiliary-Carry-Flag" class="headerlink" title="AF(Auxiliary Carry Flag)"></a>AF(Auxiliary Carry Flag)</h5><p>AF是辅助标志进位位。记录运算时第三位(0.5个字节)产生的进位值。有进位则置1，否则为0。</p>
 <h5 id="PF-Parity-Flag"><a href="#PF-Parity-Flag" class="headerlink" title="PF(Parity Flag)"></a>PF(Parity Flag)</h5><p>PF是<strong>奇偶标志位</strong>。用来为机器中传送信息时可能产生的代码出错情况提供检验条件。当结果操作数中(二进制)1的个数为偶数时PF位置1，否则置0。</p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/image-20240410204037139.png" alt="image-20240410204037139"></p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/image-20240410204037139.png" alt="image-20240410204037139"></p>
 <p>常用于逻辑运算中，在数据传输中可通过检查本标志判定是否产生数据传输错误。</p>
 <h5 id="控制标志位"><a href="#控制标志位" class="headerlink" title="控制标志位"></a>控制标志位</h5><h6 id="DF-Direction-Flag"><a href="#DF-Direction-Flag" class="headerlink" title="DF(Direction Flag)"></a>DF(Direction Flag)</h6><p>DF是<strong>方向标志位</strong>。用于在<u>串处理指令中控制处理信息的方向</u>。当<strong>DF位为1</strong>时，每次操作后使<strong>变址寄存器SI和DI减小</strong>，这样就使<u>串处理从高地址向低地址方向处理</u>；当<strong>DF位为0</strong>时，则使<strong>SI和DI增大</strong>，使<u>串处理从低地址向到地址方向处理</u>。</p>
 <h6 id="TF-Trap-Flag"><a href="#TF-Trap-Flag" class="headerlink" title="TF(Trap Flag)"></a>TF(Trap Flag)</h6><p>TF是陷阱标志，又称单步跟踪标志，用于调试时的单步方式操作。当TF位为1时，每条指令执行完后产生陷阱，由系统控制计算机；当TF位为0时，CPU正常工作，不产生陷阱。</p>

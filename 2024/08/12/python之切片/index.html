@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hwdez.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="前言：打CTF的时候去遇到了python中的切片问题，来学习一下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python可切片对象">
-<meta property="og:url" content="http://example.com/2024/08/12/python%E4%B9%8B%E5%88%87%E7%89%87/index.html">
+<meta property="og:url" content="https://hwdez.github.io/2024/08/12/python%E4%B9%8B%E5%88%87%E7%89%87/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言：打CTF的时候去遇到了python中的切片问题，来学习一下">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/14029140-3da45bbfe1029df4.jpg">
+<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/14029140-3da45bbfe1029df4.jpg">
 <meta property="article:published_time" content="2024-08-12T08:45:00.000Z">
 <meta property="article:modified_time" content="2024-09-02T08:51:38.455Z">
 <meta property="article:author" content="hwdez">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/.com//imgs/$%7Bfiilename%7D/14029140-3da45bbfe1029df4.jpg">
+<meta name="twitter:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/14029140-3da45bbfe1029df4.jpg">
 
-<link rel="canonical" href="http://example.com/2024/08/12/python%E4%B9%8B%E5%88%87%E7%89%87/">
+<link rel="canonical" href="https://hwdez.github.io/2024/08/12/python%E4%B9%8B%E5%88%87%E7%89%87/">
 
 
 <script id="page-configurations">
@@ -153,7 +153,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/12/python%E4%B9%8B%E5%88%87%E7%89%87/">
+    <link itemprop="mainEntityOfPage" href="https://hwdez.github.io/2024/08/12/python%E4%B9%8B%E5%88%87%E7%89%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -210,7 +210,7 @@
 <span id="more"></span>
 
 <h3 id="Python可切片对象的索引方式"><a href="#Python可切片对象的索引方式" class="headerlink" title="Python可切片对象的索引方式"></a>Python可切片对象的索引方式</h3><p>分为正索引和负索引两种，以list对象为a &#x3D; [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]为例：</p>
-<p><img src="/.com//imgs/$%7Bfiilename%7D/14029140-3da45bbfe1029df4.jpg" alt="img"></p>
+<p><img src="/.io//imgs/$%7Bfiilename%7D/14029140-3da45bbfe1029df4.jpg" alt="img"></p>
 <h3 id="Python切片操作的一般方式"><a href="#Python切片操作的一般方式" class="headerlink" title="Python切片操作的一般方式"></a>Python切片操作的一般方式</h3><p>一个完整的切片表达式包含两个”:”，用于分割三个参数(start_index:end_index:_step)。当只有”:”时，默认第三个参数step &#x3D; 1；当一个”:”也没有时，start_index &#x3D; end_index，表示切取start_index指定的那个元素</p>
 <p>切片操作基本表达式：object[start_index:end_index:step]</p>
 <p><strong>step</strong>：正负数均可，其绝对值大小决定切取数据时的”步长”，正负号决定切取方向，正号表示”从左往右”，负表示”从右往左”，step值省略默认为1</p>
