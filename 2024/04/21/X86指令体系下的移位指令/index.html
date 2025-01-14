@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言:学习X86指令体系下的移位指令">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/image-20240421194620811.png">
-<meta property="og:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/image-20240421194628787.png">
+<meta property="og:image" content="https://hwdez.github.io/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4/imgs/$%7Bfiilename%7D/image-20240421194620811.png">
+<meta property="og:image" content="https://hwdez.github.io/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4/imgs/$%7Bfiilename%7D/image-20240421194628787.png">
 <meta property="article:published_time" content="2024-04-21T11:12:18.000Z">
 <meta property="article:modified_time" content="2024-04-21T11:46:43.271Z">
 <meta property="article:author" content="hwdez">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hwdez.github.io/.io//imgs/$%7Bfiilename%7D/image-20240421194620811.png">
+<meta name="twitter:image" content="https://hwdez.github.io/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4/imgs/$%7Bfiilename%7D/image-20240421194620811.png">
 
 <link rel="canonical" href="https://hwdez.github.io/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4/">
 
@@ -212,7 +212,7 @@
 <li>SHR  OPD,OPS           ;逻辑右移，操作数右移，最高位补0，最低位进CF</li>
 </ol>
 <p>对标志位的影响:对AF无定义。CF为移位后的值确定，并根据移位后的结果设置SF、ZF、PF；当移动1位时，移位后如果符号位发生改变，则OF &#x3D; 1，符号位不发生变化，则OF &#x3D; 0，当移位次数大于1时，OF不确定。左移做倍增运算，右移倍减运算。</p>
-<p><img src="/.io//imgs/$%7Bfiilename%7D/image-20240421194620811.png" alt="image-20240421194620811"></p>
+<p><img src="/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4/imgs/$%7Bfiilename%7D/image-20240421194620811.png" alt="image-20240421194620811"></p>
 <h4 id="循环移位指令"><a href="#循环移位指令" class="headerlink" title="循环移位指令"></a>循环移位指令</h4><p>循环移位指令时将操作数从一端<strong>移出的位返回到另一端</strong>形成循环，分成<strong>不带进位或带进位</strong>，以及左移或者右移操作。</p>
 <p>指令格式:</p>
 <ol>
@@ -221,7 +221,7 @@
 <li>RCL  OPD,OPS       ;带进位循环左移</li>
 <li>RCR  OPD,OPS       ;带进位循环右移</li>
 </ol>
-<p><img src="/.io//imgs/$%7Bfiilename%7D/image-20240421194628787.png" alt="image-20240421194628787"></p>
+<p><img src="/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4/imgs/$%7Bfiilename%7D/image-20240421194628787.png" alt="image-20240421194628787"></p>
 
     </div>
 
@@ -319,7 +319,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
